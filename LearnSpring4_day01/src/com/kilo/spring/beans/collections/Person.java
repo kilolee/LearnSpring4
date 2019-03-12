@@ -1,4 +1,8 @@
-package com.kilo.spring.beans;
+package com.kilo.spring.beans.collections;
+
+import com.kilo.spring.beans.Car;
+
+import java.util.List;
 
 /**
  * Created by kilo on 2019/3/9.
@@ -6,16 +10,8 @@ package com.kilo.spring.beans;
 public class Person {
     private String name;
     private int age;
-    private Car car;
+    private List<Car> cars;
 
-    public Person() {
-    }
-
-    public Person(String name, int age, Car car) {
-        this.name = name;
-        this.age = age;
-        this.car = car;
-    }
 
     public String getName() {
         return name;
@@ -33,12 +29,12 @@ public class Person {
         this.age = age;
     }
 
-    public Car getCar() {
-        return car;
+    public List<Car> getCars() {
+        return cars;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
 
     @Override
@@ -46,7 +42,7 @@ public class Person {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                ", car=" + car +
+                ", cars=" + cars +
                 '}';
     }
 }

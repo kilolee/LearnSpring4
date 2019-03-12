@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!--
     配置bean
@@ -29,6 +30,102 @@
         <constructor-arg type="double" value="240"></constructor-arg>
     </bean>
 
+    <bean id="person" class="com.kilo.spring.beans.Person">
+        <property name="name" value="Tom"/>
+        <property name="age" value="24"/>
+        <!--使用property的ref属性建立bean之间的引用关系-->
+        <!--引用外部bean-->
+        <!--<property name="car" ref="car2"/>-->
+        <!--内部bean，不能被外部引用，只能在内部使用-->
+        <property name="car">
+            <bean class="com.kilo.spring.beans.Car">
+                <constructor-arg name="brand" value="Ford"/>
+                <constructor-arg name="corp" value="Changan"/>
+                <constructor-arg name="price" value="200000"/>
+            </bean>
+        </property>
+    </bean>
 
+    <bean id="person2" class="com.kilo.spring.beans.Person">
+        <constructor-arg value="Jerry"/>
+        <constructor-arg value="25"/>
+        <constructor-arg>
+            <null/>
+        </constructor-arg>
+    </bean>
 
+    <!--为级联属性赋值。注意：属性需要先初始化后才可以为级联属性赋值。否则会有异常，这与Structs2不同-->
+    <bean id="person3" class="com.kilo.spring.beans.Person">
+        <constructor-arg value="Jack"/>
+        <constructor-arg value="20"/>
+        <!--<constructor-arg name="car">-->
+        <!--<bean class="com.kilo.spring.beans.Car">-->
+        <!--<constructor-arg name="brand" value="别克"/>-->
+        <!--<constructor-arg name="corp" value="德国"/>-->
+        <!--<constructor-arg name="maxSpeed" value="300"/>-->
+        <!--</bean>-->
+        <!--</constructor-arg>-->
+        <constructor-arg name="car" ref="car"/>
+        <property name="car.maxSpeed" value="250"></property>
+    </bean>
+
+    <!--为集合属性赋值-->
+    <bean id="person4" class="com.kilo.spring.beans.collections.Person">
+        <property name="name" value="Mike"/>
+        <property name="age" value="26"/>
+        <property name="cars">
+            <!--使用list节点为List类型的属性赋值-->
+            <list>
+                <ref bean="car"/>
+                <ref bean="car2"/>
+                <bean class="com.kilo.spring.beans.Car">
+                    <constructor-arg name="brand" value="Ford"/>
+                    <constructor-arg name="corp" value="Changan"/>
+                    <constructor-arg name="price" value="200000"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--配置Map属性值-->
+    <bean id="newPerson" class="com.kilo.spring.beans.collections.NewPerson">
+        <property name="name" value="Rose"/>
+        <property name="age" value="28"/>
+        <property name="cars">
+            <!--使用Map节点及Map的Entry子节点配置Map类型的成员变量-->
+            <map>
+                <entry key="AA" value-ref="car"/>
+                <entry key="BB" value-ref="car2"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--配置Properties属性值-->
+    <bean id="dataSource" class="com.kilo.spring.beans.collections.DataSource">
+        <property name="properties">
+            <!--使用props和prop子节点来为Properties属性赋值-->
+            <props>
+                <prop key="user">root</prop>
+                <prop key="password">1234</prop>
+                <prop key="jdbcUrl">jdbc:mysql:///test</prop>
+                <prop key="driverClass">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--配置单利的集合bean，以供多个bean进行引用，需要导入util命名空间-->
+    <util:list id="cars">
+        <ref bean="car"/>
+        <ref bean="car2"/>
+    </util:list>
+
+    <bean id="person5" class="com.kilo.spring.beans.collections.Person">
+        <property name="name" value="Jack"/>
+        <property name="age" value="29"/>
+        <property name="cars" ref="cars"/>
+    </bean>
+
+    <!--通过p命名空间为bean的属性赋值，需要先导入p命名空间。相对于传统配置方式更加简洁-->
+    <bean id="person6" class="com.kilo.spring.beans.collections.Person"
+          p:name="Queen" p:age="30" p:cars-ref="cars"/>
 </beans>
