@@ -59,11 +59,11 @@
         <constructor-arg value="Jack"/>
         <constructor-arg value="20"/>
         <!--<constructor-arg name="car">-->
-        <!--<bean class="com.kilo.spring.beans.Car">-->
-        <!--<constructor-arg name="brand" value="别克"/>-->
-        <!--<constructor-arg name="corp" value="德国"/>-->
-        <!--<constructor-arg name="maxSpeed" value="300"/>-->
-        <!--</bean>-->
+            <!--<bean class="com.kilo.spring.beans.Car">-->
+            <!--<constructor-arg name="brand" value="别克"/>-->
+            <!--<constructor-arg name="corp" value="德国"/>-->
+            <!--<constructor-arg name="maxSpeed" value="300"/>-->
+            <!--</bean>-->
         <!--</constructor-arg>-->
         <constructor-arg name="car" ref="car"/>
         <property name="car.maxSpeed" value="250"></property>
