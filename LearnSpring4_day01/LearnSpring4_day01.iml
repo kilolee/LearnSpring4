@@ -8,6 +8,7 @@
           <file>file://$MODULE_DIR$/src/beans-autowire.xml</file>
           <file>file://$MODULE_DIR$/src/beans-relation.xml</file>
           <file>file://$MODULE_DIR$/src/beans-scope.xml</file>
+          <file>file://$MODULE_DIR$/src/beans-properties.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -20,5 +21,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Spring-4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.46" level="project" />
+    <orderEntry type="library" name="c3p0-0.9.1.1" level="project" />
   </component>
 </module>
